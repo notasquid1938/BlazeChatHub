@@ -1,12 +1,13 @@
 // Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyALApqz2g23REjgMNumyyWKyjFUO811XWk",
-  authDomain: "newtrieranon.firebaseapp.com",
-  projectId: "newtrieranon",
-  storageBucket: "newtrieranon.appspot.com",
-  messagingSenderId: "123637161555",
-  appId: "1:123637161555:web:fe874b142bbc253c6c70a6",
-  measurementId: "G-RVP6621Z33"
+const firebaseConfig = {
+  apiKey: "AIzaSyBHWq-XEkd83bo2AEhhcioyM7gTZuwQRPs",
+  authDomain: "blazechathub.firebaseapp.com",
+  databaseURL: "https://blazechathub-default-rtdb.firebaseio.com",
+  projectId: "blazechathub",
+  storageBucket: "blazechathub.appspot.com",
+  messagingSenderId: "227346961795",
+  appId: "1:227346961795:web:1c9b117adf212bb63dd2b6",
+  measurementId: "G-J3PVVPX2BG"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
