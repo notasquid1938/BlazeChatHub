@@ -1,4 +1,3 @@
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -9,68 +8,66 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
-// Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
-
-// initialize database
 const db = firebase.database();
+const username = prompt("Enter username:");
 
-// get user's data
-const username = prompt("Enter Your Name and then press enter to join the New Trier Chatroom");
+document.getElementById("chat-submit").addEventListener("click", () => sendMessage());
+document.getElementById("chat-input").addEventListener("keypress", (event) => {
+  if (event.code === "Enter") {
+    sendMessage();
+  }
+});
 
-// submit form
-// listen for submit event on the form and call the postChat function
-document.getElementById("message-form").addEventListener("submit", sendMessage);
-
-// send message to db
-function sendMessage(e) {
-  e.preventDefault();
-
-  // get values to be submitted
+function sendMessage() {
   const timestamp = Date.now();
-  const messageInput = document.getElementById("message-input");
-  const message = messageInput.value;
+  const message = document.getElementById("chat-input").value;
 
   if (message.length > 1000) {
-    // max character limit
     alert("Your message is too long, please keep it under 1000 characters.")
     return;
   }
 
-  // clear the input box
-  messageInput.value = "";
-
-  //auto scroll to bottom
-  document
-    .getElementById("messages")
-    .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-
-  // create db collection and send in the data
   db.ref("messages/" + timestamp).set({
-    username,
-    message,
+    username: username,
+    message: message,
     timestamp: timestamp
+  });
+
+  document.getElementById("chat-input").value = "";
+  document.getElementById("messages").scrollIntoView({
+    behavior: "smooth",
+    block: "end",
+    inline: "nearest"
   });
 }
 
-// display the messages
-const fetchChat = db.ref("messages/");
-fetchChat.on("child_added", function (snapshot) {
-  const messages = snapshot.val();
-  const messageContainer = document.createElement("div");
-  const messageElement = document.createElement("span");
-  const messageContent = document.createTextNode(`${messages.username}: ${messages.message}`);
-  const timestampElement = document.createElement("span");
-  const timestampContent = document.createTextNode(new Date(messages.timestamp).toLocaleString());
-  messageElement.appendChild(messageContent);
-  timestampElement.appendChild(timestampContent);
-  messageContainer.appendChild(messageElement);
-  messageContainer.appendChild(timestampElement);
-  messageContainer.classList.add(username === messages.username ? "sent-container" : "receive-container");
-  messageElement.classList.add(username === messages.username ? "sent" : "receive");
-  timestampElement.classList.add(username === messages.username ? "sent-timestamp" : "receive-timestamp");
-  // append the message and timestamp on the page
-  document.getElementById("messages").appendChild(messageContainer);
+db.ref("messages/").on("child_added", (snapshot) => {
+  const data = snapshot.val();
+
+  const containerElement = document.createElement("div");
+  containerElement.classList.add("message");
+
+  if (username === data.username) {
+    containerElement.classList.add("sent");
+  }
+
+  const usernameElement = document.createElement("div");
+  usernameElement.className = "message-username";
+  usernameElement.innerText = data.username;
+
+  const messageElement = document.createElement("div");
+  messageElement.className = "message-content";
+  messageElement.innerText = data.message;
+
+  const timestampElement = document.createElement("div");
+  timestampElement.className = "message-timestamp";
+  timestampElement.innerText = (new Date(data.timestamp)).toLocaleString();
+
+  containerElement.appendChild(usernameElement);
+  containerElement.appendChild(messageElement);
+  containerElement.appendChild(timestampElement);
+
+  document.getElementById("messages").appendChild(containerElement);
 });
-
-

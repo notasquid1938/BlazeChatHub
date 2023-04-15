@@ -3,28 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ben Chat</title>
-    <link rel="stylesheet" href="./index.css">
-  </head>
-  <body>
-    <header>
-      <h2>Blaze Chat Hub</h2>
-    </header>
-    
-    <div id="chat">
-      <!-- messages will display here -->
-      <ul id="messages"></ul>
+    <title>Web Chat</title>
 
-      <!-- form to send message -->
-      <form id="message-form">
-        <input id="message-input" type="text" />
-        <button id="message-btn" type="submit">Send</button>
-      </form>
+    <link rel="stylesheet" href="./index.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js" defer></script>
+    <script src="./index.js" defer></script>
+  </head>
+
+  <body>
+    <div id="header">
+      <h1>Online Chat</h1>
     </div>
 
-    <!-- scripts -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-    <script src="index.js"></script>
+    <div id="messages"></div>
+
+    <div id="chatbox">
+      <input id="chat-input" placeholder="Type here...">
+      <input type="button" id="chat-submit" value="Send">
+    </div>
   </body>
 </html>
