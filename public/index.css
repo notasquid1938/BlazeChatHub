@@ -26,7 +26,8 @@ body {
 }
 
 #header {
-  height: 80px;
+  flex-basis: 80px;
+  flex-shrink: 0;
   padding: 15px;
   display: flex;
   flex-direction: row;
@@ -37,6 +38,7 @@ body {
 }
 
 #header h1 {
+  margin: 0;
   font-size: 30px;
 }
 
@@ -52,7 +54,7 @@ body {
 }
 
 #messages .message {
-  width: 60%;
+  width: 70%;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -74,6 +76,11 @@ body {
   font-size: 110%;
 }
 
+#messages .message .message-username.blank {
+  color: #dafa73;
+  font-style: italic;
+}
+
 #messages .message .message-timestamp {
   color: #d3d3d7;
   font-size: 70%;
@@ -84,7 +91,8 @@ body {
 }
 
 #chatbox {
-  height: 80px;
+  flex-basis: 80px;
+  flex-shrink: 0;
   padding: 15px;
   display: flex;
   flex-direction: row;
@@ -110,7 +118,7 @@ body {
 }
 
 #chat-submit {
-  width: 140px;
+  flex-basis: 140px;
   background-color: #25501c;
   color: white;
   border: 2px solid #a6e798;
