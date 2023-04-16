@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Web Chat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Online Chat</title>
 
+    <link rel="stylesheet" href="./normalize.css">
     <link rel="stylesheet" href="./index.css">
 
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js" defer></script>
@@ -20,7 +21,7 @@
     <div id="messages"></div>
 
     <div id="chatbox">
-      <input id="chat-input" placeholder="Type here...">
+      <input id="chat-input" placeholder="Type here..." maxlength="1000">
       <input type="button" id="chat-submit" value="Send">
     </div>
   </body>
