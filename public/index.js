@@ -10,17 +10,11 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
 const db = firebase.database();
 const username = prompt("Enter username:");
 
-document.getElementById("chat-submit").addEventListener("click", () => sendMessage());
-document.getElementById("chat-input").addEventListener("keypress", (event) => {
-  if (event.code === "Enter") {
-    sendMessage();
-  }
-});
-
-function sendMessage() {
+const sendMessage = () => {
   const timestamp = Date.now();
   const message = document.getElementById("chat-input").value;
 
@@ -36,7 +30,22 @@ function sendMessage() {
 
   document.getElementById("chat-input").value = "";
   document.getElementById("messages").lastChild.scrollIntoView(true);
-}
+};
+
+document.getElementById("chat-input").addEventListener("keypress", (event) => {
+  if (event.code === "Enter") {
+    sendMessage();
+  }
+});
+
+document.getElementById("chat-input").addEventListener("input", (event) => {
+  const length = document.getElementById("chat-input").value.length;
+  const remainingLength = 1000 - length;
+  
+  document.getElementById("chat-input-counter").innerText = remainingLength;
+})
+
+document.getElementById("chat-submit").addEventListener("click", sendMessage);
 
 db.ref("messages/").on("child_added", (snapshot) => {
   const data = snapshot.val();
@@ -44,14 +53,21 @@ db.ref("messages/").on("child_added", (snapshot) => {
   const containerElement = document.createElement("div");
   containerElement.className = "message";
 
-  if (username === data.username) {
+  const sameUser = username !== undefined
+    && username.trim() !== ""
+    && username === data.username;
+
+  if (sameUser) {
     containerElement.classList.add("sent");
   }
 
   const usernameElement = document.createElement("div");
   usernameElement.className = "message-username";
 
-  if (data.username.trim() === "") {
+  const blankUser = data.username === undefined
+    || data.username.trim() === "";
+
+  if (blankUser) {
     usernameElement.innerText = "[anonymous]";
     usernameElement.classList.add("blank");
   } else {
