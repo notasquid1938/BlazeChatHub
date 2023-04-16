@@ -87,5 +87,14 @@ db.ref("messages/").on("child_added", (snapshot) => {
   containerElement.appendChild(messageElement);
   containerElement.appendChild(timestampElement);
 
+  const scrollTop = document.getElementById("messages").scrollTop;
+  const scrollHeight = document.getElementById("messages").scrollHeight;
+  const clientHeight = document.getElementById("messages").clientHeight;
+  const scrolledToBottom = Math.abs(scrollHeight - scrollTop - clientHeight) < 30;
+
   document.getElementById("messages").appendChild(containerElement);
+
+  if (scrolledToBottom) {
+    document.getElementById("messages").lastChild.scrollIntoView(true);
+  }
 });
