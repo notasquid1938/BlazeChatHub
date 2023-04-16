@@ -29,6 +29,7 @@ const sendMessage = () => {
   });
 
   document.getElementById("chat-input").value = "";
+  document.getElementById("chat-input").dispatchEvent(new Event("input", {bubbles: true}));
   document.getElementById("messages").lastChild.scrollIntoView(true);
 };
 
