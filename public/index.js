@@ -11,6 +11,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+const key = "a2db4b9fff4da34b52fdad51b57493d0230df3f3e50022da2794b60cc6af2a15";
 const db = firebase.database();
 const username = prompt("Enter username:");
 
@@ -22,9 +23,11 @@ const sendMessage = () => {
     return;
   }
 
+  const encryptedMessage = CryptoJS.AES.encrypt(message, key).toString();
+
   db.ref("messages/" + timestamp).set({
     username: username,
-    message: message,
+    message: encryptedMessage,
     timestamp: timestamp
   });
 
@@ -57,6 +60,7 @@ document.getElementById("chat-submit").addEventListener("click", sendMessage);
 
 db.ref("messages/").on("child_added", (snapshot) => {
   const data = snapshot.val();
+  const decryptedMessage = CryptoJS.AES.decrypt(data.message, key).toString(CryptoJS.enc.Utf8);
   const containerElement = document.createElement("div");
   containerElement.className = "message";
 
@@ -83,7 +87,7 @@ db.ref("messages/").on("child_added", (snapshot) => {
 
   const messageElement = document.createElement("div");
   messageElement.className = "message-content";
-  messageElement.innerText = data.message;
+  messageElement.innerText = decryptedMessage;
 
   const timestampElement = document.createElement("div");
   timestampElement.className = "message-timestamp";
