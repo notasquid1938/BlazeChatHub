@@ -30,7 +30,15 @@ const sendMessage = () => {
 
   document.getElementById("chat-input").value = "";
   document.getElementById("chat-input").dispatchEvent(new Event("input", {bubbles: true}));
-  document.getElementById("messages").lastChild.scrollIntoView(true);
+  
+  const messagesElement = document.getElementById("messages");
+  const scrolledToBottom = Math.abs(messagesElement.scrollHeight - messagesElement.scrollTop - messagesElement.clientHeight) < 30;
+  
+  if (!scrolledToBottom) {
+    document.getElementById("new-message").style.display = "block";
+  } else {
+    messagesElement.lastChild.scrollIntoView(true);
+  }
 };
 
 document.getElementById("chat-input").addEventListener("keypress", (event) => {
@@ -42,7 +50,6 @@ document.getElementById("chat-input").addEventListener("keypress", (event) => {
 document.getElementById("chat-input").addEventListener("input", (event) => {
   const length = document.getElementById("chat-input").value.length;
   const remainingLength = 1000 - length;
-  
   document.getElementById("chat-input-counter").innerText = remainingLength;
 })
 
@@ -50,7 +57,6 @@ document.getElementById("chat-submit").addEventListener("click", sendMessage);
 
 db.ref("messages/").on("child_added", (snapshot) => {
   const data = snapshot.val();
-
   const containerElement = document.createElement("div");
   containerElement.className = "message";
 
@@ -98,3 +104,17 @@ db.ref("messages/").on("child_added", (snapshot) => {
     document.getElementById("messages").lastChild.scrollIntoView(true);
   }
 });
+
+let usersOnlineRef = firebase.database().ref(".info/connected");
+let usersOnline = 1;
+
+usersOnlineRef.on("value", (snapshot) => {
+  if (snapshot.val()) {
+    usersOnline++;
+  } else {
+    usersOnline--;
+  }
+  document.getElementById("users-online").innerText = usersOnline;
+  console.log("Number of online users: " + usersOnline);
+});
+

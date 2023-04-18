@@ -2,6 +2,22 @@
   box-sizing: border-box;
 }
 
+#title {
+  text-align: center;
+}
+
+#new-message {
+  margin-bottom: -30px;
+  text-align: center;
+  margin-left: -200px;
+}
+
+#user-number {
+  margin-bottom: -30px;
+  text-align: center;
+  margin-left: 15px;
+}
+
 *:focus {
   outline: 0;
 }
@@ -114,11 +130,13 @@ body {
   background-color: #535455;
   color: white;
   border: 2px solid #adadae;
-  font: 14px sans-serif;
+  font: 16px sans-serif;
 }
 
 #chat-input:focus {
   border-color: white;
+  overflow: auto;
+  
 }
 
 #chat-input-counter {
