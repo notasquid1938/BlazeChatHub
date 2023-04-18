@@ -20,6 +20,9 @@ const sendMessage = () => {
   const timestamp = Date.now();
   const message = document.getElementById("chat-input").value;
 
+  //0.0014Mb max per encrypted message at 1000 characters
+  //2500 messages a day if all 100 connected
+  //can store 600,000 messages safely
   if (message.length > 1000) {
     return;
   }
@@ -111,7 +114,7 @@ db.ref("messages/").on("child_added", (snapshot) => {
 });
 
 let usersOnlineRef = firebase.database().ref(".info/connected");
-let usersOnline = 1;
+let usersOnline = 10;
 
 usersOnlineRef.on("value", (snapshot) => {
   if (snapshot.val()) {
