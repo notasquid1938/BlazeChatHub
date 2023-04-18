@@ -14,7 +14,9 @@ firebase.initializeApp(firebaseConfig);
 const key = "a2db4b9fff4da34b52fdad51b57493d0230df3f3e50022da2794b60cc6af2a15";
 const db = firebase.database();
 const randomNumber = Math.floor(Math.random() * 900000) + 100000;
+
 const username = `Anonymous${randomNumber}`;
+
 
 const sendMessage = () => {
   const timestamp = Date.now();
@@ -86,7 +88,18 @@ db.ref("messages/").on("child_added", (snapshot) => {
     usernameElement.innerText = "[anonymous]";
     usernameElement.classList.add("blank");
   } else {
+    function numberToColorHex(number) {
+      var hex = number.toString(16);
+      while (hex.length < 6) {
+        hex = "0" + hex;
+      }
+      return "#" + hex;
+    }    
+    const usernumber = data.username.split("s")
+    const usernamecolor = numberToColorHex(usernumber[1]);
     usernameElement.innerText = data.username;
+    usernameElement.style.color = usernamecolor;
+
   }
 
   const messageElement = document.createElement("div");
