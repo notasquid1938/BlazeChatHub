@@ -10,11 +10,9 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
 const key = "a2db4b9fff4da34b52fdad51b57493d0230df3f3e50022da2794b60cc6af2a15";
 const db = firebase.database();
-const randomNumber = Math.floor(Math.random() * 900000) + 100000;
-const username = `Anonymous${randomNumber}`;
+const username = `Anonymous${Math.floor(Math.random() * 900000) + 100000}`;
 
 const sendMessage = () => {
   const timestamp = Date.now();
@@ -79,33 +77,25 @@ db.ref("messages/").on("child_added", (snapshot) => {
   const usernameElement = document.createElement("div");
   usernameElement.className = "message-username";
 
-  const blankUser = data.username === undefined
-    || data.username.trim() === "";
-
-  if (blankUser) {
-    usernameElement.innerText = "[anonymous]";
-    usernameElement.classList.add("blank");
-  } else {
-    function numberToColorHex(number) {
-      var hex = number.toString(16);
-      while (hex.length < 6) {
-        hex = "0" + hex;
-      }
-      var foregroundColor = "#" + hex;
-      var r = parseInt(hex.substring(0,2), 16);
-      var g = parseInt(hex.substring(2,4), 16);
-      var b = parseInt(hex.substring(4,6), 16);
-      var yiq = ((r*299)+(g*587)+(b*114))/1000;
-      var backgroundColor = (yiq >= 128) ? "#000000" : "#ffffff";
-      // Return an object containing both the foreground and background colors
-      return {foreground: foregroundColor, background: backgroundColor};
-    }    
-    const usernumber = data.username.split("s");
-    const colors = numberToColorHex(usernumber[1]);
-    usernameElement.innerText = data.username;
-    usernameElement.style.color = colors.foreground;
-    usernameElement.style.backgroundColor = colors.background;
-  }
+  function numberToColorHex(number) {
+    var hex = number.toString(16);
+    while (hex.length < 6) {
+      hex = "0" + hex;
+    }
+    var foregroundColor = "#" + hex;
+    var r = parseInt(hex.substring(0,2), 16);
+    var g = parseInt(hex.substring(2,4), 16);
+    var b = parseInt(hex.substring(4,6), 16);
+    var yiq = ((r*299)+(g*587)+(b*114))/1000;
+    var backgroundColor = (yiq >= 128) ? "#000000" : "#ffffff";
+    // Return an object containing both the foreground and background colors
+    return {foreground: foregroundColor, background: backgroundColor};
+  }    
+  const usernumber = data.username.split("s");
+  const colors = numberToColorHex(usernumber[1]);
+  usernameElement.innerText = data.username;
+  usernameElement.style.color = colors.foreground;
+  usernameElement.style.backgroundColor = colors.background;
 
   const messageElement = document.createElement("div");
   messageElement.className = "message-content";
@@ -143,4 +133,3 @@ usersOnlineRef.on("value", (snapshot) => {
   document.getElementById("users-online").innerText = usersOnline;
   console.log("Number of online users: " + usersOnline);
 });
-
