@@ -67,3 +67,9 @@ api.env
 
 # vscode files
 .vscode
+
+#other
+Obfuscate.txt
+
+# Run the index-unobscured through this website: https://obfuscator.io/
+# using the "high" preset and then save that processed code as the index.js
