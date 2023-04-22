@@ -13,11 +13,19 @@ firebase.initializeApp(firebaseConfig);
 const key = "a2db4b9fff4da34b52fdad51b57493d0230df3f3e50022da2794b60cc6af2a15";
 const db = firebase.database();
 const username = `Anonymous${Math.floor(Math.random() * 900000) + 100000}`;
+let lastMessageTimestamp = 0;
 
 const sendMessage = () => {
+  const currentTimestamp = Date.now();
+  if (currentTimestamp - lastMessageTimestamp < 2000) {
+    return;
+  }
   const timestamp = Date.now();
   const message = document.getElementById("chat-input").value;
-
+  if (message.trim().length === 0) {
+    return;
+  }
+  lastMessageTimestamp = currentTimestamp;
   //0.0014Mb max per encrypted message at 1000 characters
   //2500 messages a day if all 100 connected
   //can store 600,000 messages safely
