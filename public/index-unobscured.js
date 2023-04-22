@@ -8,9 +8,9 @@ const firebaseConfig = {
   appId: "1:227346961795:web:1c9b117adf212bb63dd2b6",
   measurementId: "G-J3PVVPX2BG"
 };
+const key = "a2db4b9fff4da34b52fdad51b57493d0230df3f3e50022da2794b60cc6af2a15";
 
 firebase.initializeApp(firebaseConfig);
-const key = "a2db4b9fff4da34b52fdad51b57493d0230df3f3e50022da2794b60cc6af2a15";
 const db = firebase.database();
 const username = `Anonymous${Math.floor(Math.random() * 900000) + 100000}`;
 let lastMessageTimestamp = 0;
