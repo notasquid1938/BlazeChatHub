@@ -44,6 +44,13 @@ body {
   position: relative;
 }
 
+#info-button {
+  position: absolute;
+  bottom: -10;
+  right: 0;
+  margin: 10px;
+}
+
 #title {
   text-align: center;
   scale: 1.4;

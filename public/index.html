@@ -16,13 +16,31 @@
 
   <body>
     <div id="header">
+      <button id="info-button" onclick="openInfoWindow()">What is this?</button>
       <h1 id="title">Chat Hub</h1>  
       <p1 id="new-message" style="display: none;">New message sent!</p1> 
       <p2 id="user-number">Users Online: <span id="users-online"></span></p2> 
       <button id="github-button" onclick="window.location.href='https://github.com/notasquid1938/BlazeChatHub';">
         View Github
-      </button>   
+      </button>
     </div>
+    
+    <div id="info-window" style="display: none; z-index: 9999; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgb(51, 51, 51); padding: 20px; border: 1px solid black; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); color: rgb(255, 255, 255);">
+      <p>This is a real-time chat website called Chat Hub. It is hosted on firebase and allows for large scale, partially anonymous communication. All messages are encrypted using AES-256 before being sent to the database so only those viewing the website can see what is written. You can click the github button to view this site's source code if you would like to verify this all for yourself. Be kind, have fun!</p>
+      <button onclick="closeInfoWindow()">Close</button>
+    </div>
+    
+    <script>
+      function openInfoWindow() {
+        var infoWindow = document.getElementById("info-window");
+        infoWindow.style.display = "block";
+      }
+      
+      function closeInfoWindow() {
+        var infoWindow = document.getElementById("info-window");
+        infoWindow.style.display = "none";
+      }
+    </script>             
 
     <div id="messages"></div>
 
