@@ -52,6 +52,7 @@ body {
 #user-number {
   text-align: center;
   margin-top: -15px;
+  opacity: 0;
 }
 
 #github-button {
