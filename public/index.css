@@ -2,20 +2,10 @@
   box-sizing: border-box;
 }
 
-#title {
-  text-align: center;
-}
-
 #new-message {
   margin-bottom: -30px;
   text-align: center;
   margin-left: -200px;
-}
-
-#user-number {
-  margin-bottom: -30px;
-  text-align: center;
-  margin-left: 15px;
 }
 
 *:focus {
@@ -44,18 +34,33 @@ body {
 #header {
   flex-basis: 80px;
   flex-shrink: 0;
-  padding: 15px;
+  padding: 0px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   background-color: #363738;
   border-bottom: 2px solid #525354;
+  position: relative;
 }
 
-#header h1 {
-  margin: 0;
-  font-size: 30px;
+#title {
+  text-align: center;
+  scale: 1.5;
+}
+
+#user-number {
+  text-align: center;
+  margin-top: -15px;
+}
+
+#github-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  background-color: green;
+  color: white;
 }
 
 #messages {
