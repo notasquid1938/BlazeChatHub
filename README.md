@@ -3,6 +3,7 @@
 This is the repository for the website blazechathub.web.app. This project is meant to expand upon a wonderful template for a realtime chat app run on firebase. We have made this project open-source in the name of transparency and so that others can run this project/build upon it themselves.
 
 Here is a list of the features that have been added:
+
 -Made all usernames randomly generated (Anonymous + 6 digit number)
 
 -Made username color depend on username number and have background so they're easily readable
