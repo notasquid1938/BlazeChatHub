@@ -46,11 +46,46 @@
 
     <div id="chatbox">
       <div id="chat-input-container">
-        <input id="chat-input" placeholder="Type here..." maxlength="1000">
+        <div id="chat-input" placeholder="Type here..." maxlength="1000" contenteditable="true"></div>
         <span id="chat-input-counter">1000</span>
       </div>
-
+    
+      <div id="chat-formatting-options">
+        <div>
+          <label for="font-select">Font:</label>
+          <select id="font-select" class="chat-formatting-button" onchange="document.execCommand('fontName', false, this.value)">
+            <option value="Arial">Arial</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Times New Roman">Times</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Courier">Courier</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Comic Sans MS">Comic Sans</option>
+          </select>
+        </div>
+        <div>
+          <button class="chat-formatting-button" onclick="toggleFormatting('bold')"><b>B</b></button>
+          <button class="chat-formatting-button" onclick="toggleFormatting('underline')"><u>U</u></button>
+          <input type="color" class="chat-formatting-button" onchange="document.execCommand('foreColor', false, this.value)">
+        </div>
+      </div>
+    
       <input type="button" id="chat-submit" value="Send">
     </div>
+
+    <style>
+      .chat-formatting-button.selected {
+        background-color: rgb(50, 170, 255);
+      }
+    </style>
+    
+    <script>
+      function toggleFormatting(format) {
+        document.execCommand(format, false, null);
+        var button = document.querySelector(`button[onclick="toggleFormatting('${format}')"`);
+        button.classList.toggle("selected");
+      }
+    </script>    
   </body>
 </html>

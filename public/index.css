@@ -161,6 +161,19 @@ body {
   font: 16px sans-serif;
 }
 
+.chat-formatting-button {
+  padding: 5px;
+  border: none;
+  margin-right: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+.chat-formatting-button:hover {
+  background-color: #f2f2f2;
+}
+
 #chat-input:focus {
   border-color: white;
   overflow: auto;
@@ -185,4 +198,8 @@ body {
 #chat-submit:active {
   background-color: #336e27;
   border-color: white;
+}
+
+select#font-select {
+  margin-bottom: 5px;
 }
