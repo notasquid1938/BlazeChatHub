@@ -49,6 +49,7 @@ body {
   bottom: -10;
   right: 0;
   margin: 10px;
+  scale: 90%;
 }
 
 #info-window {
@@ -84,6 +85,7 @@ body {
   margin: 10px;
   background-color: green;
   color: white;
+  scale: 90%;
 }
 
 #messages {
@@ -188,11 +190,12 @@ body {
 }
 
 #chat-submit {
-  flex-basis: 140px;
+  flex-basis: 15%;
   background-color: #25501c;
   color: white;
   border: 2px solid #a6e798;
   font: 14px sans-serif;
+  font-size: 180%;
 }
 
 #chat-submit:active {
